@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   // Set axios defaults
-  axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+  axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'https://taskmanager-f4bp.onrender.com/api';
 
   useEffect(() => {
     if (token) {
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchProfile = async () => {
     try {
-      const response = await axios.get('/user');
+      const response = await axios.get('https://taskmanager-f4bp.onrender.com/user');
       setUser(response.data.user);
     } catch (error) {
       console.error('Error fetching profile:', error);
@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post('/user/login', { email, password });
+      const response = await axios.post('https://taskmanager-f4bp.onrender.com/user/login', { email, password });
       const { token: newToken, ...userData } = response.data;
       
       setToken(newToken);
@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (name, email, password) => {
     try {
-      const response = await axios.post('/user/register', { name, email, password });
+      const response = await axios.post('https://taskmanager-f4bp.onrender.com/user/register', { name, email, password });
       const { token: newToken, ...userData } = response.data;
       
       setToken(newToken);

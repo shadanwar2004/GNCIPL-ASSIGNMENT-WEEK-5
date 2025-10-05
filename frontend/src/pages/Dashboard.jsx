@@ -95,7 +95,7 @@ const Dashboard = () => {
     try {
       const taskData = { description: newTask };
       if (newTaskDueDate) taskData.dueDate = newTaskDueDate;
-      const response = await axios.post('/task', taskData);
+      const response = await axios.post('https://taskmanager-f4bp.onrender.com/task', taskData);
       setTasks([...tasks, response.data.task]);
       setNewTask('');
       setNewTaskDueDate('');
@@ -108,7 +108,7 @@ const Dashboard = () => {
 
   const handleDeleteTask = async (taskId) => {
     try {
-      await axios.delete(`/task/${taskId}`);
+      await axios.delete(`https://taskmanager-f4bp.onrender.com/task/${taskId}`);
       setTasks(tasks.filter(task => task._id !== taskId));
       setSuccess('Task deleted successfully!');
       setTimeout(() => setSuccess(''), 3000);
@@ -119,7 +119,7 @@ const Dashboard = () => {
 
   const handleToggleComplete = async (taskId, currentStatus) => {
     try {
-      const response = await axios.put(`/task/${taskId}`, { isCompleted: !currentStatus });
+      const response = await axios.put(`https://taskmanager-f4bp.onrender.com/task/${taskId}`, { isCompleted: !currentStatus });
       setTasks(tasks.map(task => task._id === taskId ? response.data.task : task));
       setSuccess(`Task marked as ${!currentStatus ? 'completed' : 'pending'}!`);
       setTimeout(() => setSuccess(''), 3000);
@@ -133,7 +133,7 @@ const Dashboard = () => {
     try {
       const updateData = { description: editText };
       if (editDueDate) updateData.dueDate = editDueDate;
-      const response = await axios.put(`/task/${taskId}`, updateData);
+      const response = await axios.put(`https://taskmanager-f4bp.onrender.com/task/${taskId}`, updateData);
       setTasks(tasks.map(task => task._id === taskId ? response.data.task : task));
       setEditingTask(null);
       setEditText('');
