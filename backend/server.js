@@ -6,7 +6,10 @@ import userRoutes from './routes/userRoutes.js'
 import taskRoutes from './routes/taskRoutes.js'
 
 const app = express();
-app.use(cors());
+app.use(cors ({
+    origin: "https://taskmanager-pi-eight.vercel.app",
+    credentials: true
+}))
 app.use(express.json());
 
 connectDB();
